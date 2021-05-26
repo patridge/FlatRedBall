@@ -41,7 +41,7 @@ jobs:
         run: nuget restore "FRBDK\Glue\Glue with All.sln"
 
       - name: Build and Publish Web App
-        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration
+        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration  /p:Platform="Any CPU"
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
       - name: Upload Artifact
