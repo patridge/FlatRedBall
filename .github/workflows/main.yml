@@ -48,6 +48,9 @@ jobs:
       - name: Restore Gum NuGet Packages
         run: nuget restore "Gum\Gum.sln"
 
+      - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
+        run: nuget restore "Gum\GumRuntime\GumRuntime.csproj"
+
       - name: Restore NuGet Packages
         run: nuget restore "FRBDK\Glue\Glue with All.sln"
 
