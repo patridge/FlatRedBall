@@ -45,7 +45,7 @@ jobs:
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
       - name: Build solution
-        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="Any CPU"
+        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="x86"
         # /p:Configuration=$env:Configuration # Failed as empty
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
