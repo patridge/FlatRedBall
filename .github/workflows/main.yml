@@ -40,8 +40,13 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore "FRBDK\Glue\Glue with All.sln"
 
-      - name: Build and Publish Web App
-        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration  /p:Platform="Any CPU"
+      # - name: Build test project
+      #   run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+        #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+
+      - name: Build solution
+        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="Any CPU"
+        # /p:Configuration=$env:Configuration # Failed as empty
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
       - name: Upload Artifact
