@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'patridge/Gum'
-          path: '..\Gum'
+          path: 'Gum'
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
