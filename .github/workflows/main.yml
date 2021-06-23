@@ -46,7 +46,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore Gum NuGet Packages
-        run: nuget restore "..\Gum\Gum.sln"
+        run: nuget restore "Gum\Gum.sln"
 
       - name: Restore NuGet Packages
         run: nuget restore "FRBDK\Glue\Glue with All.sln"
