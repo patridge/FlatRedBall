@@ -22,14 +22,22 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug] #, Release]
+        platform: [x86]
 
     # The type of runner that the job will run on
     runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      # Check out dependency repos to desired location for GitHub Actions
+      # Else: "D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln]"
+      - uses: actions/checkout@v2
+        with:
+          repository: 'patridge/Gum'
+          path: '../../Gum'
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
@@ -45,7 +53,7 @@ jobs:
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
       - name: Build solution
-        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="x86"
+        run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="${{ matrix.platform}}"
         # /p:Configuration=$env:Configuration # Failed as empty
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
