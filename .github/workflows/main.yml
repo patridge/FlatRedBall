@@ -48,8 +48,10 @@ jobs:
       - name: Restore Gum NuGet Packages
         run: nuget restore "Gum\Gum.sln"
 
+      # Location decided from prior error:
+      # D:\a\FlatRedBall\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj(132,5): error : This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\FlatRedBall\FRBDK\Glue\packages\MonoGame.Framework.DesktopGL.Core.3.8.0.13\build\MonoGame.Framework.DesktopGL.Core.targets.
       - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
-        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "Gum\packages"
+        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "FRBDK\Glue\packages\"
 
       - name: Restore NuGet Packages
         run: nuget restore "FRBDK\Glue\Glue with All.sln"
