@@ -46,7 +46,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore Gum NuGet Packages
-        run: nuget restore "Gum\Gum.sln" -PackagesDirectory="Gum\packages"
+        run: nuget restore "Gum\Gum.sln" -PackagesDirectory "Gum\packages"
 
       - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
         run: nuget restore "Gum\GumRuntime\packages.config"
