@@ -30,14 +30,17 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checking out to deeper location to appease the relative path reference to Gum (..\..\..\Gum).
       - uses: actions/checkout@v2
+        with:
+          # repository: $GITHUB_WORKSPACE
+          path: 'depth-to/appease-reference/Gum'
 
       # Check out dependency repos to desired location for GitHub Actions
       # Else: "D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln]"
       - uses: actions/checkout@v2
         with:
           repository: 'patridge/Gum'
-          path: 'Gum'
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
