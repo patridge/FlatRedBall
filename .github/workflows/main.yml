@@ -61,7 +61,7 @@ jobs:
       # Next error after adding another \FlatRedBall
       # > D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln]
       - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
-        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\packages"
+        run: nuget restore "extra-depth-for-gum-reference\Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\packages"
 
       - name: Restore NuGet Packages
         run: nuget restore "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
