@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           # repository: $GITHUB_WORKSPACE
-          path: 'depth-to/appease/reference'
+          path: 'extra-depth-for-gum-reference'
 
       # Check out dependency repos to desired location for GitHub Actions
       # Else: "D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln]"
@@ -53,7 +53,7 @@ jobs:
         run: nuget restore "Gum\Gum.sln"
 
       - name: Restore NuGet Packages
-        run: nuget restore "depth-to\appease\reference\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
+        run: nuget restore "extra-depth-for-gum-reference\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
 
       # - name: Build test project
       #   run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration /p:Platform="Any CPU"
