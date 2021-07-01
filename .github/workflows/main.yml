@@ -29,12 +29,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Check out this repository ($GITHUB_WORKSPACE)
       # Checking out to deeper location to appease the relative path reference to Gum (..\..\..\Gum).
       - uses: actions/checkout@v2
         with:
           # repository: $GITHUB_WORKSPACE
-          path: 'extra-depth-for-gum-reference'
+          path: 'extra-depth-for-gum-reference\FlatRedBall'
 
       # Check out dependency repos to desired location for GitHub Actions
       # Else: "D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\FRBDK\Glue\Glue with All.sln]"
@@ -52,18 +52,20 @@ jobs:
       - name: Restore Gum NuGet Packages
         run: nuget restore "Gum\Gum.sln"
 
+      # Trying to work through error:
+      # > D:\a\FlatRedBall\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj(132,5): error : This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\FlatRedBall\FRBDK\Glue\packages\MonoGame.Framework.DesktopGL.Core.3.8.0.13\build\MonoGame.Framework.DesktopGL.Core.targets.
+      # D:\a\FlatRedBall\FlatRedBall\Gum\GumRuntime\[GumRuntime.csproj]
+      # + ..\..\FlatRedBall\FRBDK\Glue\packages\
+      # => D:\a\FlatRedBall\FlatRedBall\FlatRedBall\FRBDK\Glue\packages\
+      # But that makes no sense to me.
       - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
-        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FRBDK\Glue\packages"
+        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\packages"
 
       - name: Restore NuGet Packages
-        run: nuget restore "extra-depth-for-gum-reference\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
-
-      # - name: Build test project
-      #   run: msbuild "FRBDK\Glue\Glue with All.sln" /p:Configuration=$env:Configuration /p:Platform="Any CPU"
-        #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+        run: nuget restore "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
 
       - name: Build solution
-        run: msbuild "extra-depth-for-gum-reference\FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="${{ matrix.platform}}"
+        run: msbuild "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln" /p:Configuration="${{ matrix.configuration }}" /p:Platform="${{ matrix.platform}}"
         # /p:Configuration=$env:Configuration # Failed as empty
         #  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
