@@ -52,6 +52,9 @@ jobs:
       - name: Restore Gum NuGet Packages
         run: nuget restore "Gum\Gum.sln"
 
+      - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
+        run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FRBDK\Glue\"
+
       - name: Restore NuGet Packages
         run: nuget restore "extra-depth-for-gum-reference\FRBDK\Glue\Glue with All.sln" # TODO: Try forward slash
 
