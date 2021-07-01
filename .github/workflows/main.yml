@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'patridge/Gum'
-          path: 'Gum'
+          path: 'extra-depth-for-gum-reference\Gum'
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
@@ -50,7 +50,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore Gum NuGet Packages
-        run: nuget restore "Gum\Gum.sln"
+        run: nuget restore "extra-depth-for-gum-reference\Gum\Gum.sln"
 
       # Trying to work through error:
       # > D:\a\FlatRedBall\FlatRedBall\Gum\GumRuntime\GumRuntime.csproj(132,5): error : This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\FlatRedBall\FRBDK\Glue\packages\MonoGame.Framework.DesktopGL.Core.3.8.0.13\build\MonoGame.Framework.DesktopGL.Core.targets.
@@ -58,6 +58,8 @@ jobs:
       # + ..\..\FlatRedBall\FRBDK\Glue\packages\
       # => D:\a\FlatRedBall\FlatRedBall\FlatRedBall\FRBDK\Glue\packages\
       # But that makes no sense to me.
+      # Next error after adding another \FlatRedBall
+      # > D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln.metaproj : error MSB3202: The project file "D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\Gum\GumRuntime\GumRuntime.csproj" was not found. [D:\a\FlatRedBall\FlatRedBall\extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\Glue with All.sln]
       - name: Restore GumRuntime NuGet Packages # Should these be restored via some containing solution?
         run: nuget restore "Gum\GumRuntime\packages.config" -PackagesDirectory "extra-depth-for-gum-reference\FlatRedBall\FRBDK\Glue\packages"
 
